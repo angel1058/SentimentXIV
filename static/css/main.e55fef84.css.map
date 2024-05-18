@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.e55fef84.css","mappings":"AAAA,cAEA,cACA,CAEA,iBAEI,cACJ","sources":["components/styles/button.css"],"sourcesContent":[".buyButtonTop\n{\nfont-size: 14px;\n}\n\n.buyButtonBottom\n{\n    font-size: 10px;\n}"],"names":[],"sourceRoot":""}
