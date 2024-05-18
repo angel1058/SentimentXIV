@@ -8,12 +8,14 @@ function BinaryOutput()
 
     useEffect(() =>
     {
+        if ( !state.autoIncrement)
+            return;
         const IntervalId = setInterval(() => { dispatch({ type: 'INCREMENT' })},10);
         return () => clearInterval(IntervalId);
     })
     return (
         <div className="fullWidthBackground">
-            {state.count.toString(2).padStart(64,"0")}
+            {state.count.toString(2).padStart(state.bits,"0")}
         </div>
     )
 }

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import BinaryOutput from '../components/binaryOutput';
 import { GlobalStateContext } from '../state/StateProvider.js';
-
+import DebugPanel from '../components/debugPanel.js';
+import BitBuyer from '../components/bitbuyer.js';
 
 function App() {
   // State hook for managing counter state
@@ -16,11 +17,14 @@ function App() {
   return (
     <div>
       <BinaryOutput></BinaryOutput>
-      <p>You clicked {state.count} times</p>
-
-      <button onClick={() => dispatch({type:'DOUBLE'})}>
-        Click me
-      </button>
+     
+      <p>{state.count}</p>
+      <BitBuyer>kkkk</BitBuyer>
+      <DebugPanel></DebugPanel>
+      <button onClick={() => dispatch({type:'DOUBLE'})}>double</button>
+      <button onClick={() => dispatch({type:'ADD_BIT'})}>add bits</button>
+      <button onClick={() => dispatch({type:'TOGGLE_AUTO'})}>toggle auto</button>
+      <button onClick={() => dispatch({type:'INCREMENT'})}>increment</button>
     </div>
   );
 }
