@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/SentimentXIV/static/css/main.e55fef84.css",
-    "main.js": "/SentimentXIV/static/js/main.b6b6af67.js",
+    "main.css": "/SentimentXIV/static/css/main.ea98b68f.css",
+    "main.js": "/SentimentXIV/static/js/main.d7228617.js",
     "index.html": "/SentimentXIV/index.html",
-    "main.e55fef84.css.map": "/SentimentXIV/static/css/main.e55fef84.css.map",
-    "main.b6b6af67.js.map": "/SentimentXIV/static/js/main.b6b6af67.js.map"
+    "main.ea98b68f.css.map": "/SentimentXIV/static/css/main.ea98b68f.css.map",
+    "main.d7228617.js.map": "/SentimentXIV/static/js/main.d7228617.js.map"
   },
   "entrypoints": [
-    "static/css/main.e55fef84.css",
-    "static/js/main.b6b6af67.js"
+    "static/css/main.ea98b68f.css",
+    "static/js/main.d7228617.js"
   ]
 }
