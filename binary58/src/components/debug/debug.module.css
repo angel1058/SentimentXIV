@@ -1,0 +1,25 @@
+
+.debugPanel {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 350px;
+    padding: 20px;
+    background-color: rgba(163, 7, 7, 0.8);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+
+  .container
+  {
+    display: flex;
+    justify-content: space-between; /* Distribute space between columns */
+    gap: 10px; /* Optional: Adds space between columns */
+  }
+
+  .column {
+    flex: 1; /* Each column takes up an equal amount of space */
+    padding:5px;
+  }
