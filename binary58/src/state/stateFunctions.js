@@ -25,9 +25,14 @@ const calculateDelay = (incrementAmount) =>
         return {interval, deltaPerInterval, intervalCount , remainder}
         }
 
-
+const incrementalComplete = (state , bit) => { return state.completeIncrements[bit]}
+const getIncrement = (state, bit) =>    { return state.increments[bit] }
 const canIncrement = (state) =>  { return state.count < maxScoreForBits(state.bits)   }
 const canAfford    = (state) =>  { return state.power >= buttonCost(state)}
-const buttonCost   = (state) =>  { return Math.pow(state.bits, 3) }
-const upgradeCost  = (state) =>  { return Math.pow(state.bits, state.bits) }
-export {maxScoreForBits, calculateDelay,canIncrement ,buttonCost,canAfford,upgradeCost}
+const buttonCost   = (state) =>  { return Math.pow(state.bits, 5) }
+const upgradeCost  = (state, bit , incremental) =>  
+    {
+        const thisBit = bit ;   
+        return Math.pow(thisBit, thisBit )* (incremental ? (getIncrement(state , bit)+1) **(bit) : 1n) 
+    }
+export {maxScoreForBits, incrementalComplete,calculateDelay,canIncrement ,buttonCost,canAfford,upgradeCost,getIncrement}

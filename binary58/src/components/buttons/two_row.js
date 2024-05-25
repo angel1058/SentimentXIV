@@ -16,7 +16,7 @@ const SlimButton = styled(Button)({
   alignItems: 'center'
 });
 
-const TwoRowButton = ({disableState, line1, line2 ,dispatchType}) => {
+const BuyBitsButton = ({disableState, line1, line2 ,dispatchType}) => {
     const { state, dispatch } = useContext(GlobalStateContext);
 
   return (
@@ -31,4 +31,4 @@ const TwoRowButton = ({disableState, line1, line2 ,dispatchType}) => {
   );
 };
 
-export default TwoRowButton;
+export default BuyBitsButton;

@@ -3,21 +3,48 @@ import { maxScoreForBits,buttonCost } from './stateFunctions.js';
 /* global BigInt */
 export const GlobalStateContext = createContext();
 
+
+function debugReducer(state, action) {
+    switch (action.type) {
+        case 'DEBUG_REDUCE_RESET_TIME':
+            return {...state , autoResetTimer : 0.2 }
+        case 'DEBUG_BUY_AUTO_RESET':
+            return {...state , 
+                autoReset : true,
+                increments : state.increments.map((item,i) => i === 3 ? item+1 : item),
+                autoResetTimer : state.autoResetTimer - (0.1) }
+ }
+}
+
+function autoReset(state , action)
+{
+    if ( state.completeIncrements[action.bit])
+        return;
+
+    if ( state.autoResetTimer <= 0.2)
+        return {...state , completeIncrements : state.completeIncrements.map((item,i) => i === action.payload.bit ? true : item)};
+
+    return {
+        ...state , 
+        autoReset : true,
+        increments : state.increments.map((item,i) => i === action.payload.bit ? item+1 : item), 
+        power : state.power - BigInt(action.payload.cost),
+        autoResetTimer : state.autoResetTimerInitialValue - (state.autoResetTimerDelta * state.increments[action.payload.bit]) 
+    }
+}
+
 function reducer(state, action) {
+    if ( action.type.startsWith("DEBUG"))
+        return debugReducer(state , action)
     const maxValue = maxScoreForBits(state.bits);
     switch (action.type) {
+        case 'BUY_AUTO_RESET': return autoReset(state , action)
+        case 'ADD_n':
+             return { ...state, bits : state.bits+ action.payload.bits , count: state.count + BigInt(action.payload.count) , power : state.power + BigInt(action.payload.count)}
         case 'TOGGLE_DEBUG':
             return {...state, debugVisible : !state.debugVisible}
         case 'MESSAGE':
             return {...state , message : action.payload}
-        case 'REDUCE_RESET_TIME':
-            return {...state , autoResetTimer : state.autoResetTimer - action.payload}
-        case 'BUY_AUTO_RESET':
-            if ( state.autoReset)
-                {
-                    return {...state , autoResetTimer : state.autoResetTimer - (0.1 * (state.autoResetLevel + 1)) , autoResetLevel : state.autoResetLevel + 1}
-                }
-            return {...state, autoReset : true}
         case 'RESET':
             return {...state, count : 0n}
         case 'INCREASE_INCREMENT':
@@ -53,17 +80,20 @@ function reducer(state, action) {
 export const GlobalProvider = ({ children }) => {
     const initialState = 
     { 
+        increments: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        completeIncrements : [false, false, false, false, false, false, false, false, false, false, false, false, false, false],
         message: 'message',
         debugVisible  :true,
-        count: BigInt(0), 
-        power: BigInt(0),
-        bits:1,
+        count: BigInt(31), 
+        power: BigInt(2000000),
+        bits:5,
         autoReset:false,
-        autoResetTimer:10.0,
-        autoResetLevel:1,
+        autoResetTimerInitialValue:0.6,
+        autoResetTimer:1.6,
+        autoResetTimerDelta:0.2,
         autoIncrement:true,
         incrementDelay : 1000,
-        incrementAmount : BigInt(1),
+        incrementAmount : BigInt(24),
 
         maxForBits: BigInt(Math.pow(4 , 2)-1),
         bit4set : true
